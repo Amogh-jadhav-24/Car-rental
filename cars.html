@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Available Cars</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-black font-sans">
+  <header class="bg-black text-white py-4 text-center text-2xl font-semibold">
+    Available Cars for Rent
+  </header>
+
+  <section class="max-w-5xl mx-auto px-4 py-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
+    <input id="searchInput" type="text" placeholder="Search cars..."
+      class="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"/>
+    <button onclick="filterCars()" class="bg-black text-white px-6 py-2 rounded hover:bg-gray-900 transition">Search</button>
+  </section>
+
+  <section id="carContainer"
+    class="max-w-6xl mx-auto px-4 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Car cards will be inserted here -->
+  </section>
+
+  <script>
+    let allCars = [];
+
+    async function fetchCars() {
+      const res = await fetch('http://localhost:5000/api/cars');
+      allCars = await res.json();
+      displayCars(allCars);
+    }
+
+    function displayCars(cars) {
+      const container = document.getElementById('carContainer');
+      container.innerHTML = '';
+      cars.forEach(car => {
+        const card = document.createElement('div');
+        card.className = "car-card bg-white rounded-lg shadow-md p-4 text-center";
+
+        const image = car.images[0] || './car.png';
+        card.innerHTML = `
+          <img src="http://localhost:5000${image}" alt="Car Image" class="w-full h-48 object-contain mx-auto mb-4"/>
+          <h3 class="car-name text-xl font-semibold mb-1">${car.name}</h3>
+          <p class="text-gray-600 mb-2">₹${car.rent}/day</p>
+          <p class="text-sm text-gray-500 mb-2">${car.details}</p>
+          <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-900">Book Now</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCars() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = allCars.filter(car => car.name.toLowerCase().includes(input));
+      displayCars(filtered);
+    }
+
+    document.getElementById("searchInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") filterCars();
+    });
+
+    fetchCars();
+  </script>
+</body>
+</html>

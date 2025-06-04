@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black & White Navbar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="bg-white">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-black">CarRentals</h1>
+            <nav class="hidden md:flex gap-6">
+                <a href="#home" class="text-black hover:underline">Home</a>
+                <a href="#cars" class="text-black hover:underline">Cars</a>
+                <a href="#about" class="text-black hover:underline">About</a>
+                <a href="#contact" class="text-black hover:underline">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menuBtn" class="text-2xl text-black">&#9776;</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 bg-white">
+            <a href="#home" class="block py-2 text-black hover:underline">Home</a>
+            <a href="#cars" class="block py-2 text-black hover:underline">Cars</a>
+            <a href="#about" class="block py-2 text-black hover:underline">About</a>
+            <a href="#contact" class="block py-2 text-black hover:underline">Contact</a>
+        </div>
+    </header>
+
+    <!-- Optional Script -->
+    <script>
+        document.getElementById("menuBtn").addEventListener("click", () => {
+            document.getElementById("mobileMenu").classList.toggle("hidden");
+        });
+    </script>
+
+    <!-- Section 2 - Hero -->
+    <section id="home" class="pt-32 pb-16 bg-white font-[Poppins]">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col-reverse lg:flex-row items-center justify-between">
+
+            <!-- Left Side -->
+            <div class="w-full lg:w-1/2 text-left">
+                <h2 id="changing-text" class="text-4xl font-semibold text-black leading-snug mb-4">
+                    Rent a Comfortable & Stylish Car to Make Every Journey Safe
+                </h2>
+                <p class="text-black text-base mb-4">
+                    हम आपके हर सफर को खास बनाते हैं। बुकिंग आसान, कीमतें वाजिब, और सर्विस शानदार।
+                </p>
+                <p class="text-gray-800 text-sm mb-6">
+                    Whether it's a quick trip across town or a weekend getaway, we offer a fleet of stylish and
+                    comfortable cars at affordable rates. Choose your ride and hit the road!
+                </p>
+                <button class="bg-black text-white px-6 py-3 rounded hover:bg-gray-900 transition mb-6">
+                    Book a Car
+                </button>
+
+                <!-- Stat Boxes -->
+                <div class="flex gap-6 flex-wrap">
+                    <!-- Happy Customers -->
+                    <div class="bg-[#f4f4f4] px-6 py-5 rounded-xl text-center shadow-sm w-48">
+                        <h2 id="customerCount" class="text-3xl font-bold text-black">0</h2>
+                        <p class="text-gray-700 font-medium text-sm">Happy Customers</p>
+                    </div>
+
+                    <!-- Years of Experience -->
+                    <div class="bg-[#f4f4f4] px-6 py-5 rounded-xl text-center shadow-sm w-48">
+                        <h2 id="experienceCount" class="text-3xl font-bold text-black">0</h2>
+                        <p class="text-gray-700 font-medium text-sm">Years of Experience</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Image -->
+            <div class="w-full lg:w-1/2 mb-12 lg:mb-0 flex justify-center">
+                <img src="./car.png" alt="Car Image"
+                    class="w-full max-w-[600px] animate-slidein bg-transparent border-none"
+                    style="object-fit: contain;" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Font & Animation -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        @keyframes slidein {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slidein {
+            animation: slidein 1.2s ease-out forwards;
+        }
+    </style>
+
+    <!-- Language Loop Script -->
+    <script>
+        const phrases = [
+            "Rent a Comfortable & Stylish Car to Make Every Journey Safe",
+            "आरामदायक और स्टाइलिश कार किराए पर लें",
+            "आरामदायक आणि स्टायलिश कार भाड्याने घ्या"
+        ];
+
+        let current = 0;
+        const heading = document.getElementById("changing-text");
+
+        setInterval(() => {
+            current = (current + 1) % phrases.length;
+            heading.textContent = phrases[current];
+        }, 2500);
+    </script>
+
+    <!-- Count-up Animation Script -->
+    <script>
+        function countUp(id, end, duration) {
+            let start = 0;
+            const element = document.getElementById(id);
+            const stepTime = Math.abs(Math.floor(duration / end));
+
+            const timer = setInterval(() => {
+                start++;
+                element.textContent = start;
+                if (start === end) clearInterval(timer);
+            }, stepTime);
+        }
+
+        window.onload = function () {
+            countUp('customerCount', 500, 2000);   // 500 in 2s
+            countUp('experienceCount', 7, 1500);   // 7 in 1.5s
+        };
+    </script>
+
+
+    <!-- Section 3 - Services & Features -->
+    <section id="services" class="bg-[#f9f9f9] py-24 font-[Poppins]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-semibold text-black mb-4">
+                Why Choose Us?
+            </h2>
+            <p class="text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
+                We’re not just about cars — we’re about experiences. Here’s what you get when you rent with us.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="Comfort Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">Ultimate Comfort</h3>
+                    <p class="text-gray-600 text-sm">
+                        Every car is well-maintained, clean, and designed for a smooth, luxurious drive.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="24/7 Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">24/7 Customer Support</h3>
+                    <p class="text-gray-600 text-sm">
+                        Our support team is available around the clock to assist you with bookings and queries.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/741/741407.png" alt="Affordable Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">Affordable Prices</h3>
+                    <p class="text-gray-600 text-sm">
+                        Transparent pricing with no hidden charges. Drive more, pay less.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3649/3649469.png" alt="Clean Vehicles Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">Sanitized Vehicles</h3>
+                    <p class="text-gray-600 text-sm">
+                        Your safety is our priority. All vehicles are fully sanitized before every trip.
+                    </p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2961/2961957.png" alt="GPS Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">GPS Enabled</h3>
+                    <p class="text-gray-600 text-sm">
+                        Navigate with ease using real-time GPS assistance in all vehicles.
+                    </p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition duration-300">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2637/2637876.png" alt="Variety Icon"
+                        class="w-16 h-16 mx-auto mb-4" />
+                    <h3 class="text-xl font-bold text-black mb-2">Wide Variety of Cars</h3>
+                    <p class="text-gray-600 text-sm">
+                        From hatchbacks to SUVs — choose the car that fits your occasion perfectly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section - Colorful Review Page -->
+    <section id="review-page" class="py-24 bg-gradient-to-b from-white to-pink-50 font-[Poppins]">
+        <!-- Review Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-black-600 tracking-tight">What Our Customers Say</h2>
+            <p class="text-gray-600 mt-2">Real experiences. Real reviews. Join our happy riders today!</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-start">
+
+            <!-- Left: Animated Reviews -->
+            <div class="w-full lg:w-1/2 h-[450px] overflow-hidden relative border rounded-xl shadow-lg bg-white">
+                <div class="absolute animate-scroll-up space-y-6 p-6">
+
+                    <!-- Review 1 -->
+                    <div class="p-4 rounded-md bg-blue-50 shadow">
+                        <h4 class="text-lg font-semibold text-blue-900">Amit Verma</h4>
+                        <div class="text-yellow-500 mb-1">⭐⭐⭐⭐⭐</div>
+                        <p class="text-sm text-blue-800">Great service! Car was clean and smooth to drive.</p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="p-4 rounded-md bg-pink-50 shadow">
+                        <h4 class="text-lg font-semibold text-pink-900">Sneha Joshi</h4>
+                        <div class="text-yellow-500 mb-1">⭐⭐⭐⭐</div>
+                        <p class="text-sm text-pink-800">Affordable and easy booking. Loved the experience.</p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="p-4 rounded-md bg-green-50 shadow">
+                        <h4 class="text-lg font-semibold text-green-900">Ravi Kulkarni</h4>
+                        <div class="text-yellow-500 mb-1">⭐⭐⭐⭐⭐</div>
+                        <p class="text-sm text-green-800">Will rent again. Very friendly service!</p>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="p-4 rounded-md bg-purple-50 shadow">
+                        <h4 class="text-lg font-semibold text-purple-900">Priya Desai</h4>
+                        <div class="text-yellow-500 mb-1">⭐⭐⭐⭐</div>
+                        <p class="text-sm text-purple-800">Cars are stylish and comfortable. Great experience.</p>
+                    </div>
+
+                    <!-- Duplicate for loop -->
+                    <div class="p-4 rounded-md bg-blue-50 shadow">
+                        <h4 class="text-lg font-semibold text-blue-900">Amit Verma</h4>
+                        <div class="text-yellow-500 mb-1">⭐⭐⭐⭐⭐</div>
+                        <p class="text-sm text-blue-800">Great service! Car was clean and smooth to drive.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="w-full lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border">
+                <h3 class="text-2xl font-bold text-black mb-6">Write a Review</h3>
+                <form>
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                        <input type="text" id="name" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-200 outline-none" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="review" class="block text-sm font-medium text-gray-700 mb-1">Your Review</label>
+                        <textarea id="review" rows="4" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-200 outline-none"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="bg-red-100 text-red-700 font-semibold px-6 py-2 rounded hover:bg-red-200 transition">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Scroll Animation -->
+    <style>
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0%);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .animate-scroll-up {
+            display: flex;
+            flex-direction: column;
+            animation: scrollUp 20s linear infinite;
+        }
+    </style>
+
+    <!-- About Us Section -->
+    <section id="about" class="bg-gray-100 text-black py-24 font-[Poppins] relative overflow-hidden">
+
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
+
+            <!-- Left Side: Owner Image with Animation -->
+            <div class="w-full md:w-1/2 flex justify-center relative z-10">
+                <img src="https://img.freepik.com/premium-photo/young-man-isolated-blue_1368-124991.jpg?semt=ais_hybrid&w=740" alt="Owner"
+                    class="w-[320px] rounded-full border-4 border-white shadow-lg animate-bounce-slow" />
+            </div>
+
+            <!-- Right Side: Text -->
+            <div class="w-full md:w-1/2 text-left">
+                <h2 class="text-4xl font-bold mb-4 text-black">About the Founder</h2>
+                <p class="text-gray-800 mb-4">
+                    <strong class="text-black">Amogh Jadhav</strong> founded this car rental platform with a vision to
+                    provide
+                    stylish, comfortable, and safe rides across the city. With years of experience and a passion for
+                    excellent service,
+                    we aim to make your journey memorable.
+                </p>
+                <p class="text-gray-700 mb-6">
+                    Driven by values and customer satisfaction, we are proud to have served 500+ happy customers in the
+                    last few years.
+                </p>
+
+                <div class="flex items-center gap-4">
+                    <!-- Facebook -->
+                    <a href="#" class="text-gray-700 hover:text-black text-xl">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-700 hover:text-black text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bounce Animation -->
+    <style>
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+    </style>
+
+
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="bg-gray-900 text-white py-24 font-[Poppins] relative overflow-hidden">
+
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
+
+            <!-- Left Side: Info -->
+            <div class="w-full md:w-1/2 z-10">
+                <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
+                <p class="text-gray-300 mb-4 text-lg">
+                    Have questions? We’re happy to help. Book your perfect ride or just say hello!
+                </p>
+                <p class="text-gray-400 mb-4">
+                    हमसे संपर्क करें और अपने सफर को आरामदायक बनाएं।<br>
+                    आमच्याशी संपर्क करा आणि आरामशीर प्रवास करा!
+                </p>
+
+                <div class="text-gray-400 space-y-2">
+                    <p><i class="fas fa-envelope mr-2 text-red-400"></i> contact@yourcarrental.com</p>
+                    <p><i class="fas fa-phone mr-2 text-red-400"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Vashi, Navi Mumbai</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Form with Background Image -->
+            <div class="w-full md:w-1/2 relative z-10">
+                <!-- Car Image Behind -->
+                <img src="./car.png" alt="Car"
+                    class="absolute right-0 bottom-0 w-[4200px] opacity-100 animate-carMove pointer-events-none z-0" />
+
+                <!-- Form Card -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg relative z-10">
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm mb-2">Your Name</label>
+                            <input type="text"
+                                class="w-full p-3 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-400"
+                                placeholder="Enter your name" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm mb-2">Your Email</label>
+                            <input type="email"
+                                class="w-full p-3 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-400"
+                                placeholder="Enter your email" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm mb-2">Your Message</label>
+                            <textarea rows="4"
+                                class="w-full p-3 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-400"
+                                placeholder="Write your message..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-red-200 text-black font-semibold py-3 rounded hover:bg-red-300 transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Move Animation -->
+    <style>
+        @keyframes carMove {
+            0% {
+                transform: translateX(100%);
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.05;
+            }
+
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        .animate-carMove {
+            animation: carMove 18s linear infinite;
+        }
+    </style>
+
+
+</body>
+
+</html>
